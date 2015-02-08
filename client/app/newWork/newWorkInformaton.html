@@ -1,0 +1,16 @@
+<form>
+  <div class="form-group">
+    <label for="">Заголовок:</label>
+    <input class="form-control" type="text" ng-model="newWork.heading"/>
+  </div>
+  <hr/>
+
+  <div class="form-group">
+    <label for="">Описание:</label>
+    <div text-angular ng-model="newWork.description"></div>
+  </div>
+  <hr/>
+</form>
+<button class="btn btn-lg btn-primary" ui-sref="newWork.info.photos">Добавить фотографии</button>
+<ui-view></ui-view>
+
