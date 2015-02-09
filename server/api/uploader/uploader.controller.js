@@ -3,7 +3,6 @@ var path = require("path");
 var rootPath = path.join(process.cwd(), 'client', 'assets');
 var workCtrl = require('../work/work.controller');
 
-console.log(rootPath)
 exports.upload =  function(req, res){
   var filesDir = path.join(rootPath, 'files'),
       workDir = path.join(filesDir, req.query.id),
@@ -20,8 +19,6 @@ exports.upload =  function(req, res){
   }
 
   req.busboy.on('file', function(fieldname, file, filename){
-    console.log('uploading: ' + filename);
-
     fstream = fs.createWriteStream(path.join(workDir, filename));
     file.pipe(fstream);
 
@@ -31,36 +28,3 @@ exports.upload =  function(req, res){
     });
   })
 };
-
-
-
-
-
-
-
-/*
-*
-*
-*
-* req.busboy.on('file', function(fieldname, file, filename){
- console.log('uploading: ' + filename);
- filesIndex++;
-
- fstream = fs.createWriteStream(path.join(workDir, filename));
- file.pipe(fstream);
-
- fstream.on('close', function(){
- console.log(filename + ' uploaded')
- filesIndex--;
-
- if(filesIndex === 0){
- console.log('last one');
- res.send({success: "success"});
- }
- })
- })
-*
-*
-*
-*
-* */

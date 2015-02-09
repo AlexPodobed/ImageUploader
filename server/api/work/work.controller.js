@@ -1,7 +1,11 @@
 'use strict';
 
 var _ = require('lodash');
+var fs = require('fs');
+var path = require("path");
 var Work = require('./work.model');
+var rootPath = path.join(process.cwd(), 'client', 'assets', 'files');
+var rmdir = require('rimraf');
 
 // Get list of works
 exports.index = function(req, res) {
@@ -30,15 +34,30 @@ exports.create = function(req, res) {
 
 // Updates an existing work in the DB.
 exports.update = function(req, res) {
+    var isRemoveArray = req.query && !!req.query.remove;
+
   if(req.body._id) { delete req.body._id; }
-  console.log(req.params)
+
   Work.findById(req.params.id, function (err, work) {
     if (err) { return handleError(res, err); }
     if(!work) { return res.send(404); }
+
     var updated = _.merge(work, req.body);
+    if(isRemoveArray){
+        updated.images = [];
+    }
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, {status: 'success'});
+
+      if(isRemoveArray){
+          rmdir(path.join(rootPath, req.params.id), function (err) {
+              if (err) return handleError(res, err);
+              return res.send(204);
+          });
+      }else{
+          return res.json(200, {status: 'success'});
+
+      }
     });
   });
 };
@@ -59,7 +78,11 @@ exports.destroy = function(req, res) {
     if(!work) { return res.send(404); }
     work.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+        rmdir(path.join(rootPath, req.params.id), function(err){
+            if(err) return handleError(res, err);
+
+            return res.send(204);
+        });
     });
   });
 };
