@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('imageUploaderApp')
-  .controller('workPreviewCtrl', function ($scope,$state, work, Work) {
+  .controller('workPreviewCtrl', function ($scope,$state, work, Work, toaster) {
 
     $scope.global = {
       work: work
@@ -11,9 +11,9 @@ angular.module('imageUploaderApp')
       var isRemove = confirm("Are you sure?");
 
       if(isRemove){
-        console.dir(work)
         Work.remove({work_id: work._id}, function(){
-          $state.go('main')
+            toaster.pop('success', "Success", "Работа удалена");
+            $state.go('main')
         })
       }
     }

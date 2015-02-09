@@ -5,5 +5,4 @@ angular.module('imageUploaderApp')
       var works = Work.query(function(){
         $scope.works = works;
       });
-
   });

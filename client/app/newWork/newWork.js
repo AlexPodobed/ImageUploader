@@ -14,8 +14,7 @@ angular.module('imageUploaderApp')
       })
       .state('newWork.photos', {
         url: '/photos/:_id',
-        templateUrl: 'app/newWork/newWorkPhotos.html',
-        controller: 'NewWorkCtrlUploadPhotos'
+        templateUrl: 'app/newWork/newWorkPhotos.html'
       });
 
 

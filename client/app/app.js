@@ -6,7 +6,8 @@ angular.module('imageUploaderApp', [
   'ngSanitize',
   'ui.router',
   'textAngular',
-  'angularFileUpload'
+  'angularFileUpload',
+  'toaster'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
