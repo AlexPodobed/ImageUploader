@@ -1,5 +1,20 @@
-<h1>Main page</h1>
+<div class="home">
+  <h3>All works</h3>
+  <hr/>
+  <button class="btn  btn-primary" ui-sref="newWork.info">
+    <span class="glyphicon glyphicon-plus"></span>Добавить новую работу
+  </button>
+  <hr/>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 item" ng-repeat="work in works ">
 
+      <div>
+        <img src="{{work.images[0]}}" alt="" />
+      </div>
+      <h4 class="text-center">
+        <a ui-sref="preview.preview({id:work._id})">{{work.heading}}</a>
+      </h4>
+    </div>
+  </div>
 
-
-
+</div>

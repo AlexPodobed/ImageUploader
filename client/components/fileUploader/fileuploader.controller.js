@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('imageUploaderApp')
-  .controller('imageUploaderCtrl', ['$scope', 'FileUploader', function ($scope, FileUploader) {
-
+  .controller('imageUploaderCtrl', ['$scope', 'FileUploader', '$state', function ($scope, FileUploader, $state) {
+    console.log('imageUploader',$state.params._id);
     var uploader = $scope.uploader = new FileUploader({
-      url: '/api/fileupload'
+      url: '/api/fileupload?id='+$state.params._id
     });
 
     // FILTERS
@@ -51,6 +51,7 @@ angular.module('imageUploaderApp')
     };
     uploader.onCompleteAll = function() {
       console.info('onCompleteAll');
+      $state.go('main');
     };
 
     console.info('uploader', uploader);

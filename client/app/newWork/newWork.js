@@ -8,14 +8,15 @@ angular.module('imageUploaderApp')
         templateUrl: 'app/newWork/newWork.html',
         controller: 'NewWorkCtrl'
       })
-      .state('newWork.info.photos', {
-        url: '/photos',
-        templateUrl: 'app/newWork/newWorkPhotos.html',
-        controller: 'NewWorkCtrl'
-      })
       .state('newWork.info', {
         url: '/info',
-        templateUrl: 'app/newWork/newWorkInformaton.html',
-        controller: 'NewWorkCtrl'
+        templateUrl: 'app/newWork/newWorkInfo.html'
       })
+      .state('newWork.photos', {
+        url: '/photos/:_id',
+        templateUrl: 'app/newWork/newWorkPhotos.html',
+        controller: 'NewWorkCtrlUploadPhotos'
+      });
+
+
   });

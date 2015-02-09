@@ -1,0 +1,12 @@
+<div class="preview">
+  <h3>{{global.work.heading}}</h3>
+
+  <div class="row">
+    <div class="col-md-4" ng-bind-html="global.work.description"></div>
+    <div class="col-md-8">
+      <div class="preview-image" ng-repeat="photo in global.work.images ">
+        <img src="{{photo}}" alt="" popup="" />
+      </div>
+    </div>
+  </div>
+</div>

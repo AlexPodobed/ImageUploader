@@ -10,11 +10,17 @@
       <a href="/" class="navbar-brand">image-uploader</a>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+
+
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
+        <li ui-sref-active="active">
+          <a ui-sref="main">Home</a>
+        </li>
+        <li ng-class="{active: state.includes('newWork')}">
+          <a ui-sref="newWork.info">New Work</a>
         </li>
       </ul>
+      {{$state}}
     </div>
   </div>
 </div>

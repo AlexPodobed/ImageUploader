@@ -1,19 +1,24 @@
 'use strict';
 
 angular.module('imageUploaderApp')
-  .controller('NewWorkCtrl', function ($scope, Work) {
+  .controller('NewWorkCtrl', function ($scope, $state, Work) {
     $scope.newWork = {};
 
     function createNewWork (){
       console.log($scope.newWork)
+
       var work = new Work($scope.newWork);
       work.$save(function(data){
-        console.log(data)
-      })
+        $scope.newWork = {};
+        $state.go('newWork.photos', {_id: data._id});
+      });
     }
 
-    var works = Work.query(function(data){
-      console.log(works);
-    })
     $scope.createNewWork = createNewWork;
-  });
+  })
+  .controller('NewWorkCtrlUploadPhotos', ['$scope', '$state',  function($scope, $state){
+
+
+  }]);
+
+

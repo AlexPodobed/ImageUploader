@@ -5,7 +5,7 @@ var Work = require('./work.model');
 
 // Get list of works
 exports.index = function(req, res) {
-  Work.find(function (err, works) {
+  Work.find({}).sort({created: 1}).exec(function (err, works) {
     if(err) { return handleError(res, err); }
     return res.json(200, works);
   });
@@ -31,14 +31,24 @@ exports.create = function(req, res) {
 // Updates an existing work in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
+  console.log(req.params)
   Work.findById(req.params.id, function (err, work) {
     if (err) { return handleError(res, err); }
     if(!work) { return res.send(404); }
     var updated = _.merge(work, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, work);
+      return res.json(200, {status: 'success'});
     });
+  });
+};
+
+exports.updateImages = function(id,imgPath, res){
+  Work.findByIdAndUpdate(id, {
+    $push: {images: imgPath}
+  }, function(err, model){
+    if (err) { return handleError(res, err); }
+    return res.json(200, {status: "OK"});
   });
 };
 
